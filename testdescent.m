@@ -18,6 +18,7 @@ X = nx.fit_transform(Xo);
 ny = normalizer(normalizer_type);
 Y = ny.fit_transform(Yo);
 
+
 ########################################################################                         
 ## Apartado 3: Trayectorias de minimización en el espacio paramétrico ##
 ## para el caso particular de aproximaciones cuadráticas              ##
@@ -163,49 +164,38 @@ zlabel('{\theta_2}',"fontsize", 20);
 grid;
 
 
-
 ########################################################################                         
 ## Apartado 4: Evolución de la hipótesis en cada caso para llegar     ##
-## al mínimo                                                          ##
+## al mínimo.                                                         ##
 ########################################################################
 
-#Se tomo de referencia el codigo de batch_grad_descent.m brindado por el profesor.
-## We have to de-normalize the normalized estimation
-## Limits for plot of regressed lines
+#Tomado como referencia batch_grad_descent.m (brindado por el profesor)
 minX = min(Xo);
 maxX = max(Xo);
-xxx=linspace(minX,maxX,length(Xo)); ## Some areas in the whole range
-X1=nx.transform([ones(length(xxx),1) xxx']); ## Normalized desired areas
+xxx=linspace(minX,maxX,length(Xo));
+X1=nx.transform([ones(length(xxx),1) xxx']);
 
-
-
-
-## Método Batch Gradient Descent ##
-
-#Abre un pot de los valores normalizados  
-figure(6,"name","Evolucion de la hipótesis Batch Gradient Descent");
+## Método Batch Gradient Descent ## 
+figure(6,"name","Evolución de la hipótesis Batch Gradient Descent");
 plot(nx.itransform(X),ny.itransform(Y),"*b",2);
 hold on;
 
 Y1=X1 * thetas_batch(1,1:2)';
 Y11=ny.itransform(Y1);
 plot(xxx,Y11,'k',"linewidth",2);
- ## and now with the intermediate versions
-  for (i=[2:rows(thetas_batch(:,1:2))])
-    Y1s=X1 * thetas_batch(i,1:2)';
-    Y11=ny.itransform(Y1s);    	
-    plot(xxx,Y11,'c',"linewidth",0.5);
-  endfor;
-## Repaint the last one as green
+
+for (i=[2:rows(thetas_batch(:,1:2))])
+  Y1s=X1 * thetas_batch(i,1:2)';
+  Y11=ny.itransform(Y1s);    	
+  plot(xxx,Y11,'c',"linewidth",0.5);
+endfor;
+
 plot(xxx,Y11,'g',"linewidth",3);
 
 
 
-
-
 ## Método Stochastic Gradient Descent ##
-#Abre un pot de los valores normalizados  
-figure(7,"name","Evolucion de la hipótesis Stochastic Gradient Descent");
+figure(7,"name","Evolución de la hipótesis Stochastic Gradient Descent");
 plot(nx.itransform(X),ny.itransform(Y),"*b");
 hold on;
 
@@ -213,43 +203,37 @@ Y1=X1 * thetas_stoch(1,1:2)';
 Y11=ny.itransform(Y1);
 plot(xxx,Y11,'k',"linewidth",2);
 
- ## and now with the intermediate versions
-  for (i=[2:rows(thetas_stoch(:,1:2))])
-    Y1s=X1 * thetas_stoch(i,1:2)';
-    Y11=ny.itransform(Y1s);    	
-    plot(xxx,Y11,'c',"linewidth",0.5);
-  endfor;
-## Repaint the last one as green
+for (i=[2:rows(thetas_stoch(:,1:2))])
+  Y1s=X1 * thetas_stoch(i,1:2)';
+  Y11=ny.itransform(Y1s);    	
+  plot(xxx,Y11,'c',"linewidth",0.5);
+endfor;
+  
 plot(xxx,Y11,'g',"linewidth",3);
 
 
 
-
-
-
-## Método Stochastic Gradient Descent with momentum ##
-#Abre un plot de los valores normalizados  
-figure(8,"name","Evolucion de la hipótesis Stochastic Gradient Descent with momentum");
+## Método Stochastic Gradient Descent with momentum ## 
+figure(8,"name","Evolución de la hipótesis Stochastic Gradient Descent with Momentum");
 plot(nx.itransform(X),ny.itransform(Y),"*b");
 hold on;
 
 Y1=X1 * thetas_mom(1,1:2)';
 Y11=ny.itransform(Y1);
 plot(xxx,Y11,'k',"linewidth",2);
-## and now with the intermediate versions
-  for (i=[2:rows(thetas_mom(:,1:2))])
-    Y1s=X1 * thetas_mom(i,1:2)';
-    Y11=ny.itransform(Y1s);    	
-    plot(xxx,Y11,'c',"linewidth",0.5);
-  endfor;
-## Repaint the last one as green
+
+for (i=[2:rows(thetas_mom(:,1:2))])
+  Y1s=X1 * thetas_mom(i,1:2)';
+  Y11=ny.itransform(Y1s);    	
+  plot(xxx,Y11,'c',"linewidth",0.5);
+endfor;
+
 plot(xxx,Y11,'g',"linewidth",3);
 
 
 
 ## Método Stochastic Gradient Descent with RMSprop##
-#Abre un plot de los valores normalizados  
-figure(9,"name","Evolucion de la hipótesis Stochastic Gradient Descent with RMSprop");
+figure(9,"name","Evolución de la hipótesis Stochastic Gradient Descent with RMSprop");
 plot(nx.itransform(X),ny.itransform(Y),"*b");
 hold on;
 
@@ -257,43 +241,38 @@ Y1=X1 * thetas_mom(1,1:2)';
 Y11=ny.itransform(Y1);
 plot(xxx,Y11,'k',"linewidth",2);
 
- ## and now with the intermediate versions
-  for (i=[2:rows(thetas_rms(:,1:2))])
-    Y1s=X1 * thetas_rms(i,1:2)';
-    Y11=ny.itransform(Y1s);    	
-    plot(xxx,Y11,'--c',"linewidth",0.3);
-  endfor;
-## Repaint the last one as green
+for (i=[2:rows(thetas_rms(:,1:2))])
+  Y1s=X1 * thetas_rms(i,1:2)';
+  Y11=ny.itransform(Y1s);    	
+  plot(xxx,Y11,'--c',"linewidth",0.3);
+endfor;
+
 plot(xxx,Y11,'g',"linewidth",3);
 
 
 
-
-
-## Método Stochastic Gradient Descent with ADAM##
-#Abre un plot de los valores normalizados  
-figure(10,"name","Evolucion de la hipótesis Stochastic Gradient Descent with ADAM");
+## Método Stochastic Gradient Descent with ADAM## 
+figure(10,"name","Evolución de la hipótesis Stochastic Gradient Descent with ADAM");
 plot(nx.itransform(X),ny.itransform(Y),"*b");
 hold on;
-
 
 Y1=X1 * thetas_adam(1,1:2)';
 Y11=ny.itransform(Y1);
 plot(xxx,Y11,'k',"linewidth",2);
 
- ## and now with the intermediate versions
-  for (i=[2:rows(thetas_adam(:,1:2))])
-    Y1s=X1 * thetas_adam(i,1:2)';
-    Y11=ny.itransform(Y1s);    	
-    plot(xxx,Y11,'--c',"linewidth",0.3);
-  endfor;
-## Repaint the last one as green
+for (i=[2:rows(thetas_adam(:,1:2))])
+  Y1s=X1 * thetas_adam(i,1:2)';
+  Y11=ny.itransform(Y1s);    	
+  plot(xxx,Y11,'--c',"linewidth",0.3);
+endfor;
+
 plot(xxx,Y11,'g',"linewidth",3);
 hold off;
 
+
 ########################################################################                         
-## Apartado 5: Muestre para varias tasas de aprendizaje ?             ##
-#las curvas de evolución del error J(?)                               ##
+## Apartado 5: Evolución del error J(?) en función del número de      ##
+## iteración, para varios valores de la tasa de aprendizaje.          ##
 ########################################################################
 
 t0 = [-1 -0.2 -0.3];

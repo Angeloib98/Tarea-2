@@ -111,10 +111,6 @@ function [thetas,errors]=descentpoly(tf,gtf,theta0,X,Y,lr,varargin)
     error("Learning rate must be between 0 and 1");
   endif
 
-  ## ################################################################
-  ## Your code in here!!! 
-  ## Next lines are just an example.  You should change them
-
   method = p.Results.method;       ## String with desired method
   beta = p.Results.beta;           ## Momentum parameters beta
   beta2 = p.Results.beta2;         ## ADAM paramter beta2
