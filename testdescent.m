@@ -43,6 +43,9 @@ hold on;
 plot3(thetas_batch(:,1),thetas_batch(:,2),thetas_batch(:,3),"ob");
 xlabel('{\theta_0}'); ylabel('{\theta_1}'); zlabel('{\theta_2}');
 grid;
+hold off
+
+
 
 ## Método Stochastic Gradient Descent ##
 t0 = [-1 -0.2 -0.3];
@@ -138,11 +141,223 @@ grid;
 
 
 ########################################################################                         
-## Apartado 4:  ##
+## Apartado 4: Evolucion de la hipótesis en cada caso para llegar     ##
+## al mínimo                                                          ##
 ########################################################################
 
+#Se tomo de referencia el codigo de batch_grad_descent.m brindado por el profesor.
+## We have to de-normalize the normalized estimation
+## Limits for plot of regressed lines
+minX = min(Xo);
+maxX = max(Xo);
+xxx=linspace(minX,maxX,length(Xo)); ## Some areas in the whole range
+X1=nx.transform([ones(length(xxx),1) xxx']); ## Normalized desired areas
 
-## Apartado 6: 
+
+
+
+## Método Batch Gradient Descent ##
+
+#Abre un pot de los valores normalizados  
+figure(6,"name","Evolucion de la hipótesis Batch Gradient Descent");
+plot(nx.itransform(X),ny.itransform(Y),"*b",2);
+hold on;
+
+Y1=X1 * thetas_batch(1,1:2)';
+Y11=ny.itransform(Y1);
+plot(xxx,Y11,'k',"linewidth",2);
+ ## and now with the intermediate versions
+  for (i=[2:rows(thetas_batch(:,1:2))])
+    Y1s=X1 * thetas_batch(i,1:2)';
+    Y11=ny.itransform(Y1s);    	
+    plot(xxx,Y11,'c',"linewidth",0.5);
+  endfor;
+## Repaint the last one as green
+plot(xxx,Y11,'g',"linewidth",3);
+
+
+
+
+
+## Método Stochastic Gradient Descent ##
+#Abre un pot de los valores normalizados  
+figure(7,"name","Evolucion de la hipótesis Stochastic Gradient Descent");
+plot(nx.itransform(X),ny.itransform(Y),"*b");
+hold on;
+
+Y1=X1 * thetas_stoch(1,1:2)';
+Y11=ny.itransform(Y1);
+plot(xxx,Y11,'k',"linewidth",2);
+
+ ## and now with the intermediate versions
+  for (i=[2:rows(thetas_stoch(:,1:2))])
+    Y1s=X1 * thetas_stoch(i,1:2)';
+    Y11=ny.itransform(Y1s);    	
+    plot(xxx,Y11,'c',"linewidth",0.5);
+  endfor;
+## Repaint the last one as green
+plot(xxx,Y11,'g',"linewidth",3);
+
+
+
+
+
+
+## Método Stochastic Gradient Descent with momentum ##
+#Abre un plot de los valores normalizados  
+figure(8,"name","Evolucion de la hipótesis Stochastic Gradient Descent with momentum");
+plot(nx.itransform(X),ny.itransform(Y),"*b");
+hold on;
+
+Y1=X1 * thetas_mom(1,1:2)';
+Y11=ny.itransform(Y1);
+plot(xxx,Y11,'k',"linewidth",2);
+## and now with the intermediate versions
+  for (i=[2:rows(thetas_mom(:,1:2))])
+    Y1s=X1 * thetas_mom(i,1:2)';
+    Y11=ny.itransform(Y1s);    	
+    plot(xxx,Y11,'c',"linewidth",0.5);
+  endfor;
+## Repaint the last one as green
+plot(xxx,Y11,'g',"linewidth",3);
+
+
+
+## Método Stochastic Gradient Descent with RMSprop##
+#Abre un plot de los valores normalizados  
+figure(9,"name","Evolucion de la hipótesis Stochastic Gradient Descent with RMSprop");
+plot(nx.itransform(X),ny.itransform(Y),"*b");
+hold on;
+
+Y1=X1 * thetas_mom(1,1:2)';
+Y11=ny.itransform(Y1);
+plot(xxx,Y11,'k',"linewidth",2);
+
+ ## and now with the intermediate versions
+  for (i=[2:rows(thetas_rms(:,1:2))])
+    Y1s=X1 * thetas_rms(i,1:2)';
+    Y11=ny.itransform(Y1s);    	
+    plot(xxx,Y11,'--c',"linewidth",0.3);
+  endfor;
+## Repaint the last one as green
+plot(xxx,Y11,'g',"linewidth",3);
+
+
+
+
+
+## Método Stochastic Gradient Descent with ADAM##
+#Abre un plot de los valores normalizados  
+figure(10,"name","Evolucion de la hipótesis Stochastic Gradient Descent with ADAM");
+plot(nx.itransform(X),ny.itransform(Y),"*b");
+hold on;
+
+
+Y1=X1 * thetas_adam(1,1:2)';
+Y11=ny.itransform(Y1);
+plot(xxx,Y11,'k',"linewidth",2);
+
+ ## and now with the intermediate versions
+  for (i=[2:rows(thetas_adam(:,1:2))])
+    Y1s=X1 * thetas_adam(i,1:2)';
+    Y11=ny.itransform(Y1s);    	
+    plot(xxx,Y11,'--c',"linewidth",0.3);
+  endfor;
+## Repaint the last one as green
+plot(xxx,Y11,'g',"linewidth",3);
+hold off;
+
+########################################################################                         
+## Apartado 5: Muestre para varias tasas de aprendizaje ?             ##
+#las curvas de evolución del error J(?)                               ##
+########################################################################
+t0 = [-1 -0.2 -0.3];
+l_rate=0.01; #tiene que ser menor o igual a 0.01
+maxiter=300;
+epsilon=0.005;
+method="batch";
+
+[thetas_batch,errors_batch]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
+                            "method",method,
+                            "epsilon",epsilon,
+                            "maxiter",maxiter);
+                           
+
+figure(15,"name","error iteracion");
+
+legend({'alpha=0.01','alpha=0.001','alpha=0.005','alpha=0.0043'}
+                              ,"location","northeastoutside");
+hold on;
+iter_batch=[0:1:length(errors_batch)-1]';
+plot(iter_batch,errors_batch,'b','linewidth',2);
+
+l_rate=0.001; #tiene que ser menor o igual a 0.01
+[thetas_batch,errors_batch]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
+                            "method",method,
+                            "epsilon",epsilon,
+                            "maxiter",maxiter);
+iter_batch=[0:1:length(errors_batch)-1]';
+plot(iter_batch,errors_batch,'r','linewidth',2);
+
+
+l_rate=0.005; #tiene que ser menor o igual a 0.01
+[thetas_batch,errors_batch]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
+                            "method",method,
+                            "epsilon",epsilon,
+                            "maxiter",maxiter);
+iter_batch=[0:1:length(errors_batch)-1]';
+plot(iter_batch,errors_batch,'g','linewidth',2);
+
+l_rate=0.0043; #tiene que ser menor o igual a 0.01
+[thetas_batch,errors_batch]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
+                            "method",method,
+                            "epsilon",epsilon,
+                            "maxiter",maxiter);
+iter_batch=[0:1:length(errors_batch)-1]';
+plot(iter_batch,errors_batch,'c','linewidth',2);
+hold off;
+
+
+##maxiter=300;
+##figure(11,"name","Error vs iterations graph for batch");
+##hold on;
+##aux=1.5;
+##n=6;
+##errors_batch=[];
+##errors_batch_prom=[];
+##for i=(1:5)
+##  [thetas_batch,errors_batchx]=descentpoly(@loss,@gradloss,t0,X,Y,aux/n,
+##                            "method",method,
+##                            "epsilon",epsilon,
+##                            "maxiter",maxiter);
+##   
+##   errors_batch=[errors_batch,errors_batchx];                         
+##endfor
+##for i=1:length(errors_batch)
+##  errors_batch_prom=[errors_batch_prom ; mean(errors_batch(i:40,:))];
+##  i=i+40;
+##endfor
+##
+##iter_batch=[0:1:length(errors_batch)-1]';
+##plot(iter_batch,errors_batch_prom(:,1),'b','linewidth',2);
+##plot(iter_batch,errors_batch_prom(:,2),'r','linewidth',2);
+##plot(iter_batch,errors_batch_prom(:,3),'g','linewidth',2);
+##plot(iter_batch,errors_batch_prom(:,4),'y','linewidth',2);
+##plot(iter_batch,errors_batch_prom(:,5),'c','linewidth',2);
+##axis([0 350 0 100]);
+##hold off;
+#iter_stoch=[0:1:length(errors_stoch)-1]';
+#plot(iter_stoch,errors_stoch,'g','linewidth',1);
+
+#iter_mom=[0:1:length(errors_mom)-1]';
+#plot(iter_mom,errors_mom,'r','linewidth',1);
+
+#iter_rms=[0:1:length(errors_rms)-1]';
+#plot(iter_rms,errors_rms,'m','linewidth',1);
+
+#iter_adam=[0:1:length(errors_adam)-1]';
+#plot(iter_adam,errors_adam,'y','linewidth',1);
+
 
 ## Apartado 7: 
 
