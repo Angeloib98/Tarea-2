@@ -1,6 +1,5 @@
 % Main entry code
 % This is the script called to start the evaluation process
-
 1;
 pkg load optim;
 
@@ -29,119 +28,144 @@ t0 = [-1 -0.2 -0.3];
 l_rate=0.004;
 maxiter=300;
 epsilon=0.005;
-method="batch";
 
 [thetas_batch,errors_batch]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
-                            "method",method,
+                            "method","batch",
                             "epsilon",epsilon,
                             "maxiter",maxiter);
                            
-figure(1,"name","Trayectoria de minimización en el espacio paramétrico - Método Batch Gradient Descent");
+figure(1,"name","Trayectoria de minimización en el espacio paramétrico");
 hold off;
 plot3(thetas_batch(:,1),thetas_batch(:,2),thetas_batch(:,3),"k-");
 hold on;
 plot3(thetas_batch(:,1),thetas_batch(:,2),thetas_batch(:,3),"ob");
-xlabel('{\theta_0}'); ylabel('{\theta_1}'); zlabel('{\theta_2}');
+t0_str=cstrcat("Iniciado en ", mat2str(t0));
+title({"Trayectoria de minimización en el espacio paramétrico";
+              t0_str; "Método Batch Gradient Descent"},
+              "fontsize", 20);
+xlabel('{\theta_0}',"fontsize", 20);
+ylabel('{\theta_1}',"fontsize", 20); 
+zlabel('{\theta_2}',"fontsize", 20);
 grid;
-hold off
-
-
 
 ## Método Stochastic Gradient Descent ##
 t0 = [-1 -0.2 -0.3];
-l_rate=0.003;
+l_rate=0.001;
 maxiter=500;
-epsilon=0.005;
-minibatch=10; %%0.5*rows(Xo);
-method="stochastic";
+epsilon=0.001;
+minibatch=20; %%0.5*rows(Xo);
 
 [thetas_stoch,errors_stoch]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
-                            "method",method,
+                            "method","stochastic",
                             "maxiter",maxiter,
                             "epsilon",epsilon,
                             "minibatch",minibatch);
                            
-figure(2,"name","Trayectoria de minimización en el espacio paramétrico - Método Stochastic Gradient Descent");
+figure(2,"name","Trayectoria de minimización en el espacio paramétrico");
 hold off;
 plot3(thetas_stoch(:,1),thetas_stoch(:,2),thetas_stoch(:,3),"k-");
 hold on;
 plot3(thetas_stoch(:,1),thetas_stoch(:,2),thetas_stoch(:,3),"ob");
-xlabel('{\theta_0}'); ylabel('{\theta_1}'); zlabel('{\theta_2}');
+t0_str=cstrcat("Iniciado en ", mat2str(t0));
+title({"Trayectoria de minimización en el espacio paramétrico";
+              t0_str; "Método Stochastic Gradient Descent"},
+              "fontsize", 20);
+xlabel('{\theta_0}',"fontsize", 20);
+ylabel('{\theta_1}',"fontsize", 20); 
+zlabel('{\theta_2}',"fontsize", 20);
 grid;
 
 ## Método Stochastic Gradient Descent with Momentum ##
 t0 = [-1 -0.2 -0.3];
 l_rate=0.003;
 maxiter=500;
-epsilon=0.005;
-minibatch=10;
-method="momentum";
+epsilon=0.001;
+minibatch=20;
 
 [thetas_mom,errors_mom]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
-                            "method",method,
+                            "method","momentum",
                             "maxiter",maxiter,
                             "epsilon",epsilon,
                             "minibatch",minibatch);
                            
-figure(3,"name","Trayectoria de minimización en el espacio paramétrico - Stoch. Gradient Descent with Momentum");
+figure(3,"name","Trayectoria de minimización en el espacio paramétrico");
 hold off;
 plot3(thetas_mom(:,1),thetas_mom(:,2),thetas_mom(:,3),"k-");
 hold on;
 plot3(thetas_mom(:,1),thetas_mom(:,2),thetas_mom(:,3),"ob");
-xlabel('{\theta_0}'); ylabel('{\theta_1}'); zlabel('{\theta_2}');
+t0_str=cstrcat("Iniciado en ", mat2str(t0));
+title({"Trayectoria de minimización en el espacio paramétrico";
+              t0_str; "Método Stochastic Gradient Descent with Momentum"},
+              "fontsize", 20);
+xlabel('{\theta_0}',"fontsize", 20);
+ylabel('{\theta_1}',"fontsize", 20); 
+zlabel('{\theta_2}',"fontsize", 20);
 grid;
 
 ## Método Stochastic Gradient Descent with RMSprop ##
 t0 = [-1 -0.2 -0.3];
-l_rate=0.005;
+l_rate=0.01;
 beta=0.9;
+beta2=0.95;
 maxiter=500;
-epsilon=1e-7;
-minibatch=10; %%0.5*rows(Xo);
-method="rmsprop";
+epsilon=0.005;
+minibatch=20; %%0.5*rows(Xo);
 
 [thetas_rms,errors_rms]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
-                            "method",method,
+                            "method","rmsprop",
                             "beta", beta,
+                            "beta2", beta2,
                             "maxiter",maxiter,
                             "epsilon",epsilon,
                             "minibatch",minibatch);
                            
-figure(4,"name","Trayectoria de minimización en el espacio paramétrico - Stoch. Gradient Descent with RMSprop");
+figure(4,"name","Trayectoria de minimización en el espacio paramétrico");
 hold off;
 plot3(thetas_rms(:,1),thetas_rms(:,2),thetas_rms(:,3),"k-");
 hold on;
 plot3(thetas_rms(:,1),thetas_rms(:,2),thetas_rms(:,3),"ob");
-xlabel('{\theta_0}'); ylabel('{\theta_1}'); zlabel('{\theta_2}');
+t0_str=cstrcat("Iniciado en ", mat2str(t0));
+title({"Trayectoria de minimización en el espacio paramétrico";
+              t0_str; "Método Stochastic Gradient Descent with RMSprop"},
+              "fontsize", 20);
+xlabel('{\theta_0}',"fontsize", 20);
+ylabel('{\theta_1}',"fontsize", 20); 
+zlabel('{\theta_2}',"fontsize", 20);
 grid;
 
 ## Método Stochastic Gradient Descent with Adam ##
 t0 = [-1 -0.2 -0.3];
-l_rate=0.003;
+l_rate=0.05;
 beta=0.9;
-maxiter=1000;
-epsilon=0.001;
-minibatch=10; %%0.5*rows(Xo);
-method="adam";
+maxiter=500;
+epsilon=0.005;
+minibatch=20; %%0.5*rows(Xo);
 
 [thetas_adam,errors_adam]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
-                            "method",method,
+                            "method","adam",
                             "beta", beta,
                             "maxiter",maxiter,
                             "epsilon",epsilon,
                             "minibatch",minibatch);
                            
-figure(5,"name","Trayectoria de minimización en el espacio paramétrico - Stoch. Gradient Descent with Adam");
+figure(5,"name","Trayectoria de minimización en el espacio paramétrico");
 hold off;
 plot3(thetas_adam(:,1),thetas_adam(:,2),thetas_adam(:,3),"k-");
 hold on;
 plot3(thetas_adam(:,1),thetas_adam(:,2),thetas_adam(:,3),"ob");
-xlabel('{\theta_0}'); ylabel('{\theta_1}'); zlabel('{\theta_2}');
+t0_str=cstrcat("Iniciado en ", mat2str(t0));
+title({"Trayectoria de minimización en el espacio paramétrico";
+              t0_str; "Método Stochastic Gradient Descent with Adam"},
+              "fontsize", 20);
+xlabel('{\theta_0}',"fontsize", 20);
+ylabel('{\theta_1}',"fontsize", 20); 
+zlabel('{\theta_2}',"fontsize", 20);
 grid;
 
 
+
 ########################################################################                         
-## Apartado 4: Evolucion de la hipótesis en cada caso para llegar     ##
+## Apartado 4: Evolución de la hipótesis en cada caso para llegar     ##
 ## al mínimo                                                          ##
 ########################################################################
 
@@ -271,6 +295,7 @@ hold off;
 ## Apartado 5: Muestre para varias tasas de aprendizaje ?             ##
 #las curvas de evolución del error J(?)                               ##
 ########################################################################
+
 t0 = [-1 -0.2 -0.3];
 l_rate=0.01; #tiene que ser menor o igual a 0.01
 maxiter=300;
