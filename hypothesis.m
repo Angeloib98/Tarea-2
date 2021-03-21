@@ -1,7 +1,6 @@
 % Evaluate the hypothesis with all given x
 function y=hypothesis(x,theta)
-  
-  ## Put your code in here
-  x_poly = bsxfun(@power,x,0:length(theta)-1);
+  orden=columns(theta)-1;
+  x_poly = bsxfun(@power,x,(0:orden));
   y = x_poly*theta;
 endfunction;
