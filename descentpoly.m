@@ -213,7 +213,7 @@ function [thetas,errors]=descentpoly(tf,gtf,theta0,X,Y,lr,varargin)
       grad = gtf(theta_actual,X(sample,:),Y(sample));
       
       s = beta2*s + (1-beta2)*(grad.^2);
-      gg = grad./(sqrt(s+epsilon));
+      gg = grad./(sqrt(s+1e-8));
   
       theta_nuevo = theta_actual - lr*gg;
       thetas = [thetas; theta_nuevo];
@@ -246,7 +246,7 @@ function [thetas,errors]=descentpoly(tf,gtf,theta0,X,Y,lr,varargin)
       
       V = beta*V + (1-beta)*grad;
       s = beta2*s + (1-beta2)*(grad.^2);
-      gg = V./(sqrt(s+epsilon));
+      gg = V./(sqrt(s+1e-8));
   
       theta_nuevo = theta_actual - lr*gg;
       thetas = [thetas; theta_nuevo];
