@@ -165,8 +165,8 @@ grid;
 
 
 ######################################################################                         
- Apartado 4: Evolución de la hipótesis en cada caso para llegar     ##
- al mínimo.                                                         ##
+##Apartado 4: Evolución de la hipótesis en cada caso para llegar     ##
+##al mínimo.                                                         ##
 ######################################################################
 
 #Tomado como referencia batch_grad_descent.m (brindado por el profesor)
@@ -188,6 +188,8 @@ plot(nx.itransform(X),ny.itransform(Y),"*b",2);
 title({"Evolución de la hipótesis por el método:"," Batch Gradient Descent"},
               "fontsize", 20);
 axis([0 maxX 0 1000]);
+xlabel('Area',"fontsize", 10);
+ylabel('Precio',"fontsize", 10); 
 grid on;
 hold on;
 
@@ -216,6 +218,8 @@ plot(nx.itransform(X),ny.itransform(Y),"*b",2);
 title({"Evolución de la hipótesis por el método:"," Stochastic Gradient Descent"},
               "fontsize", 20);
 axis([0 maxX 0 1000]);
+xlabel('Area',"fontsize", 10);
+ylabel('Precio',"fontsize", 10); 
 grid on;
 hold on;
 
@@ -242,6 +246,8 @@ plot(nx.itransform(X),ny.itransform(Y),"*b",2);
 title({"Evolución de la hipótesis por el método:"," Stochastic Gradient Descent with momentum"},
               "fontsize", 20);
 axis([0 maxX 0 1000]);
+xlabel('Area',"fontsize", 10);
+ylabel('Precio',"fontsize", 10); 
 grid on;
 hold on;
 
@@ -268,6 +274,8 @@ plot(nx.itransform(X),ny.itransform(Y),"*b",2);
 title({"Evolución de la hipótesis por el método:"," Stochastic Gradient Descent with RMSprop"},
               "fontsize", 20);
 axis([0 maxX 0 1000]);
+xlabel('Area',"fontsize", 10);
+ylabel('Precio',"fontsize", 10); 
 grid on;
 hold on;
 
@@ -294,6 +302,8 @@ plot(nx.itransform(X),ny.itransform(Y),"*b",2);
 title({"Evolución de la hipótesis por el método:"," Stochastic Gradient Descent with ADAM"},
               "fontsize", 20);
 axis([0 maxX 0 1000]);
+xlabel('Area',"fontsize", 10);
+ylabel('Precio',"fontsize", 10); 
 grid on;
 hold on;
 
