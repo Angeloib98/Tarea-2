@@ -35,16 +35,17 @@ para cada uno de los cinco métodos, cuando se tiene el caso particular de aprox
 Las figuras que genera se identifican con los números del 1 al 5.
 
 ### Parámetros editables
-Los parámetros son específicos para cada método, no se pueden cambiar de forma global.
+Los parámetros son específicos para cada método, no se pueden cambiar de forma global. Para modificarlos
+se tienen que editar las constantes que se encuentran debajo del nombre de cada método, según lo siguiente:
 
 *t0* es un vector fila que indica el punto inicial utilizado en el aprendizaje, en esta sección en 
-particular se trabaja con polinomios de orden dos, por lo que *t0* tendrá tres valores.
+particular se trabaja con polinomios de orden dos, por lo que *t0* será un vector con tres entradas.
 
 *l_rate* corresponde a la tasa de aprendizaje.
 
 *maxiter* es el número de iteraciones máximas que se desea ejecutar.
 
-*epsilon* es el valor utilizado para calcular el error entre una iteración y la siguiente.
+*epsilon* es el valor utilizado para calcular el error entre el theta de una iteración y el de la siguiente.
 
 *minibatch* es la variable que contiene el tamaño de los minibatch para los métodos "stochastic". Se
 suele recomendar utilizar *0.5·rows(Xo)*.
@@ -58,7 +59,22 @@ suele recomendar utilizar *0.5·rows(Xo)*.
 
 ## Aproximaciones para órdenes distintos de polinomios
 Esta sección del código (identificada como "apartado 7") realiza una comparación entre las aproximaciones
-finales para regresiones con polinomios de diversos órdenes.
+finales para regresiones con polinomios de órdenes distintos. Las figuras que genera se identifican con 
+los números del 16 al 20.
+
+### Parámetros editables
+*orden* es un vector fila que contiene los varios valores de "n" (órden del polinomio) que se desean evaluar.
+Es posible modificar los 4 propuestos sin necesidad de mayores cambios.
+
+También es posible graficar más de 4 órdenes polinomiales distintos, hasta un máximo de 10 en
+un único gráfico. De ser así, el cálculo se realiza de forma automática, pero se deberán agregar las siguientes 
+instrucciones para mostrar más de 4 curvas:
+
+'''
+plot(areas,precios_poly(:,1),'b',"linewidth",0.5);
+hold on;
+'''
+
 
 
 
