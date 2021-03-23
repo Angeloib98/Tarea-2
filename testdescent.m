@@ -1,12 +1,11 @@
-% Main entry code
-% This is the script called to start the evaluation process
+# Este es el script que se llama para iniciar el proceso de evaluación
 1;
 pkg load optim;
 
-# Data stored each sample in a row, where the last row is the label
+# Los datos están almacenados en cada fila, donde la última columna son las etiquetas
 D=load("escazu40.dat");
 
-# Extract the areas and the prices
+# Extraer las áreas y los precios
 Xo=D(:,1);
 Yo=D(:,4);
 
@@ -649,7 +648,7 @@ hold off;
 ## obtenidas con órdenes polinomiales distintas                       ##
 ########################################################################
 
-orden = [1 2 3 7]; ##Órdenes que se desean plottear
+orden = [1 2 3 7]; ##Órdenes de los polinomios que se desean graficar
 
 normalizer_type = "minmax";
 nx = normalizer(normalizer_type);
@@ -674,8 +673,8 @@ plot(areas,precios_poly(:,4),'r',"linewidth",0.5);hold on;
 
 plot(Xo,Yo,"*b",2);
 legend({cstrcat("n=", mat2str(orden(1))),
-        cstrcat("n=", mat2str(orden(2)))
-        cstrcat("n=", mat2str(orden(3)))
+        cstrcat("n=", mat2str(orden(2))),
+        cstrcat("n=", mat2str(orden(3))),
         cstrcat("n=", mat2str(orden(4)))},"location","northeastoutside");
 title({"Aproximaciones para distintos órdenes de polinomios (n)";
               "Método Batch Gradient Descent"},
@@ -696,8 +695,8 @@ plot(areas,precios_poly(:,4),'r',"linewidth",0.5);hold on;
 
 plot(Xo,Yo,"*b",2);
 legend({cstrcat("n=", mat2str(orden(1))),
-        cstrcat("n=", mat2str(orden(2)))
-        cstrcat("n=", mat2str(orden(3)))
+        cstrcat("n=", mat2str(orden(2))),
+        cstrcat("n=", mat2str(orden(3))),
         cstrcat("n=", mat2str(orden(4)))},"location","northeastoutside");
 title({"Aproximaciones para distintos órdenes de polinomios (n)";
               "Método Stochastic Gradient Descent"},
@@ -718,8 +717,8 @@ plot(areas,precios_poly(:,4),'r',"linewidth",0.5);hold on;
 
 plot(Xo,Yo,"*b",2);
 legend({cstrcat("n=", mat2str(orden(1))),
-        cstrcat("n=", mat2str(orden(2)))
-        cstrcat("n=", mat2str(orden(3)))
+        cstrcat("n=", mat2str(orden(2))),
+        cstrcat("n=", mat2str(orden(3))),
         cstrcat("n=", mat2str(orden(4)))},"location","northeastoutside");
 title({"Aproximaciones para distintos órdenes de polinomios (n)";
               "Método Stochastic Gradient Descent with Momentum"},
@@ -740,8 +739,8 @@ plot(areas,precios_poly(:,4),'r',"linewidth",0.5);hold on;
 
 plot(Xo,Yo,"*b",2);
 legend({cstrcat("n=", mat2str(orden(1))),
-        cstrcat("n=", mat2str(orden(2)))
-        cstrcat("n=", mat2str(orden(3)))
+        cstrcat("n=", mat2str(orden(2))),
+        cstrcat("n=", mat2str(orden(3))),
         cstrcat("n=", mat2str(orden(4)))},"location","northeastoutside");
 title({"Aproximaciones para distintos órdenes de polinomios (n)";
               "Método Stochastic Gradient Descent with RMSprop"},
@@ -762,8 +761,8 @@ plot(areas,precios_poly(:,4),'r',"linewidth",0.5);hold on;
 
 plot(Xo,Yo,"*b",2);
 legend({cstrcat("n=", mat2str(orden(1))),
-        cstrcat("n=", mat2str(orden(2)))
-        cstrcat("n=", mat2str(orden(3)))
+        cstrcat("n=", mat2str(orden(2))),
+        cstrcat("n=", mat2str(orden(3))),
         cstrcat("n=", mat2str(orden(4)))},"location","northeastoutside");
 title({"Aproximaciones para distintos órdenes de polinomios (n)";
               "Método Stochastic Gradient Descent with Adam"},
