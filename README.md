@@ -57,16 +57,16 @@ suele recomendar utilizar `0.5*rows(Xo)`.
 Esta sección del código (identificada como "apartado 4" en *testdescent.m*) utiliza la función de hipotesis para mostrar como se van
 acercando las aproximaciones a su valor esperado (el final), donde las figuras que genera se identifican con los números
 del 6 al 10. Además, los colores utilizados representan:
--Negro: aproximación inicial
--Cyan: todas las aproximaciones menos la inicial y la esperada
--Verde: la aproximación esperado (final)
+- Negro: aproximación inicial
+- Cyan: todas las aproximaciones menos la inicial y la esperada
+- Verde: la aproximación esperado (final)
 
 ## Evolución del error J
 Esta sección del código (identificada como "apartado 5" en *testdescent.m*) realiza una comparación de la evolución del error del gradiente
 con respecto a las iteraciones con distintos learning rates, identificado en el código como *l_rate*. Se puede ver distintas curvas de error 
 modificando el *l_rate* de cada función en el código. Aparte, debido a la cantidad de datos que se genera con las funciones el comando 
 de plot da error con ciertos *l_rate* en adelante, debido a esto se recomienda probar con *l_rates* menores a 0.01 en todos los métodos
-si se necesita cambiar.
+si se necesita cambiar. Esta sección se pueden ver los resultados en las figuras 11 al 15.
 
 ## Aproximaciones para órdenes distintos de polinomios
 Esta sección del código (identificada como "apartado 7" en *testdescent.m*) realiza una comparación entre las aproximaciones
