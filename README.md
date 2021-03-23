@@ -41,16 +41,16 @@ se tienen que editar las constantes que se encuentran debajo del nombre de cada 
 `t0` es un vector fila que indica el punto inicial utilizado en el aprendizaje, en esta sección en 
 particular se trabaja con polinomios de orden dos, por lo que *t0* será un vector con tres entradas.
 
-*l_rate* corresponde a la tasa de aprendizaje.
+`l_rate` corresponde a la tasa de aprendizaje.
 
-*maxiter* es el número de iteraciones máximas que se desea ejecutar.
+`maxiter` es el número de iteraciones máximas que se desea ejecutar.
 
-*epsilon* es el valor utilizado para calcular el error entre el theta de una iteración y el de la siguiente.
+`epsilon` es el valor utilizado para calcular el error entre el theta de una iteración y el de la siguiente.
 
-*minibatch* es la variable que contiene el tamaño de los minibatch para los métodos "stochastic". Se
-suele recomendar utilizar *0.5·rows(Xo)*.
+`minibatch` es la variable que contiene el tamaño de los minibatch para los métodos "stochastic". Se
+suele recomendar utilizar `0.5*rows(Xo)`.
 
-*beta* y *beta2* son parámetros utilizados para la optimización, se recomienda no cambiarlos.
+`beta` y `beta2` son parámetros utilizados para la optimización, se recomienda no cambiarlos.
 
 
 ## Evolución de la hipótesis
@@ -63,7 +63,7 @@ finales para regresiones con polinomios de órdenes distintos. Las figuras que g
 los números del 16 al 20.
 
 ### Parámetros editables
-*orden* es un vector fila que contiene los varios valores de "n" (órden del polinomio) que se desean evaluar.
+`orden` es un vector fila que contiene los varios valores de órden del polinomio que se desean evaluar.
 Es posible modificar los 4 propuestos sin necesidad de mayores cambios.
 
 También es posible graficar más de 4 órdenes polinomiales distintos, hasta un máximo de 10 en
@@ -74,18 +74,10 @@ instrucciones para mostrar más de 4 curvas:
 plot(areas,precios_poly(:,n),'color',"linewidth",0.5);
 hold on;
 ```
-Donde *n* es el número de la curva y *color* el color de la curva. 
+Donde `n` es el número de la curva y `'color'` el color de la curva. 
 Para agregar la respectiva leyenda al gráfico se utiliza:
 
 ```
 cstrcat("n=", mat2str(orden(n)))
 
 ```
-
-
-
-
-
-
-
-
