@@ -46,11 +46,12 @@
 
 %
 % (C) 2021 Pablo Alvarado Tarea 2, I Semestre 2021 EL5852
-% Introducción al Reconocimiento de Patrones Escuela de Ingeniería
-% Electrónica, Tecnológico de Costa Rica
+% Introducción al Reconocimiento de Patrones
+% Escuela de Ingeniería Electrónica, Tecnológico de Costa Rica
 %
-% (C) 2021 <Su Copyright AQUI>
-
+% (C) 2021 Sofía Acerbi Tarea 2, I Semestre 2021 EL5852
+% Introducción al Reconocimiento de Patrones
+% Escuela de Ingeniería Electrónica, Tecnológico de Costa Rica
 
 function [thetas,errors]=descentpoly(tf,gtf,theta0,X,Y,lr,varargin)
 
