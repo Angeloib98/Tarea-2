@@ -34,13 +34,19 @@ Esta sección del código (identificada como "apartado 3") calcula la evolución
 para cada uno de los cinco métodos. Las figuras que genera se identifican con los números del 1 al 5.
 
 ### Parámetros editables
+Los parámetros son específicos para cada método, no se pueden cambiar de forma global.
+
 *t0* es un vector fila que indica el punto inicial utilizado en el aprendizaje, en esta sección en 
-particular se trabaja con polinomios de orden dos, por lo que el theta tendrá tres valores.
+particular se trabaja con polinomios de orden dos, por lo que *t0* tendrá tres valores.
 
 *l_rate* corresponde a la tasa de aprendizaje.
 
 *maxiter* es el número de iteraciones máximas que se desea ejecutar.
 
 *epsilon* es el valor utilizado para calcular el error entre una iteración y la siguiente.
+
+*minibatch* es la variable que contiene el tamaño de los minibatch para los métodos "stochastic".
+
+*beta* y *beta2* son parámetros utilizados para la optimización, se recomienda no cambiarlos.
 
 ## Aproximaciones para órdenes distintos de polinomios
