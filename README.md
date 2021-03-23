@@ -8,8 +8,8 @@ Sofía Acerbi Martini - 2017111691
 ## Tabla de contenidos
 * [Información general](#información-general)
 * [Trayectorias de minimización en el espacio paramétrico](#trayectorias-de-minimización-en-el-espacio-paramétrico)
-* [Evolución de la hipótesis](#apartado4)
-* [Evolución del error J](#apartado5)
+* [Evolución de la hipótesis](#evolución-de-la-hipótesis)
+* [Evolución del error J](#evolución-del-error-J)
 * [Aproximaciones para órdenes distintos de polinomios](#aproximaciones-para-órdenes-distintos-de-polinomios)
 
 ## Información General
@@ -31,7 +31,8 @@ Para modificar alguno de los parámetros refiérase a la sección correspondient
 
 ## Trayectorias de minimización en el espacio paramétrico
 Esta sección del código (identificada como "apartado 3") calcula la evolución de los valores de theta
-para cada uno de los cinco métodos. Las figuras que genera se identifican con los números del 1 al 5.
+para cada uno de los cinco métodos, cuando se tiene el caso particular de aproximaciones cuadráticas. 
+Las figuras que genera se identifican con los números del 1 al 5.
 
 ### Parámetros editables
 Los parámetros son específicos para cada método, no se pueden cambiar de forma global.
@@ -45,8 +46,23 @@ particular se trabaja con polinomios de orden dos, por lo que *t0* tendrá tres 
 
 *epsilon* es el valor utilizado para calcular el error entre una iteración y la siguiente.
 
-*minibatch* es la variable que contiene el tamaño de los minibatch para los métodos "stochastic".
+*minibatch* es la variable que contiene el tamaño de los minibatch para los métodos "stochastic". Se
+suele recomendar utilizar *0.5·rows(Xo)*.
 
 *beta* y *beta2* son parámetros utilizados para la optimización, se recomienda no cambiarlos.
 
+
+## Evolución de la hipótesis
+
+## Evolución del error J
+
 ## Aproximaciones para órdenes distintos de polinomios
+Esta sección del código (identificada como "apartado 7") realiza una comparación entre las aproximaciones
+finales para regresiones con polinomios de diversos órdenes.
+
+
+
+
+
+
+
