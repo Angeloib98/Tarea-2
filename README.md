@@ -38,7 +38,7 @@ Las figuras que genera se identifican con los números del 1 al 5.
 Los parámetros son específicos para cada método, no se pueden cambiar de forma global. Para modificarlos
 se tienen que editar las constantes que se encuentran debajo del nombre de cada método, según lo siguiente:
 
-*t0* es un vector fila que indica el punto inicial utilizado en el aprendizaje, en esta sección en 
+`t0` es un vector fila que indica el punto inicial utilizado en el aprendizaje, en esta sección en 
 particular se trabaja con polinomios de orden dos, por lo que *t0* será un vector con tres entradas.
 
 *l_rate* corresponde a la tasa de aprendizaje.
@@ -70,10 +70,17 @@ También es posible graficar más de 4 órdenes polinomiales distintos, hasta un
 un único gráfico. De ser así, el cálculo se realiza de forma automática, pero se deberán agregar las siguientes 
 instrucciones para mostrar más de 4 curvas:
 
-'''
-plot(areas,precios_poly(:,1),'b',"linewidth",0.5);
+```
+plot(areas,precios_poly(:,n),'color',"linewidth",0.5);
 hold on;
-'''
+```
+Donde *n* es el número de la curva y *color* el color de la curva. 
+Para agregar la respectiva leyenda al gráfico se utiliza:
+
+```
+cstrcat("n=", mat2str(orden(n)))
+
+```
 
 
 
