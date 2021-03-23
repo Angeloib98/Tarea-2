@@ -26,11 +26,11 @@ Para calcular las aproximaciones para órdenes superiores a dos se utiliza
 el normalizador "minmax" esto con el fin de evitar que con órdenes polinomiales 
 altos se produzcan errores.
 
-Todas las 20 gráficas se despliegan automáticamente al correr el código *testdescent.m*.
-Para modificar alguno de los parámetros refiérase a la sección correspondiente.
+Todas las 20 gráficas se despliegan automáticamente al correr el archivo *testdescent.m*. En este último 
+archivo es posible modificar los parámetros, para ello refiérase a la sección correspondiente.
 
 ## Trayectorias de minimización en el espacio paramétrico
-Esta sección del código (identificada como "apartado 3") calcula la evolución de los valores de theta
+Esta sección del código (identificada como "apartado 3" en *testdescent.m*) calcula la evolución de los valores de theta
 para cada uno de los cinco métodos, cuando se tiene el caso particular de aproximaciones cuadráticas. 
 Las figuras que genera se identifican con los números del 1 al 5.
 
@@ -43,7 +43,7 @@ particular se trabaja con polinomios de orden dos, por lo que *t0* será un vect
 
 `l_rate` corresponde a la tasa de aprendizaje.
 
-`maxiter` es el número de iteraciones máximas que se desea ejecutar.
+`maxiter` es el número de iteraciones máximas que se desean ejecutar.
 
 `epsilon` es el valor utilizado para calcular el error entre el theta de una iteración y el de la siguiente.
 
@@ -54,11 +54,13 @@ suele recomendar utilizar `0.5*rows(Xo)`.
 
 
 ## Evolución de la hipótesis
+Esta sección del código (identificada como "apartado 4" en *testdescent.m*) ...
 
 ## Evolución del error J
+Esta sección del código (identificada como "apartado 5" en *testdescent.m*) ...
 
 ## Aproximaciones para órdenes distintos de polinomios
-Esta sección del código (identificada como "apartado 7") realiza una comparación entre las aproximaciones
+Esta sección del código (identificada como "apartado 7" en *testdescent.m*) realiza una comparación entre las aproximaciones
 finales para regresiones con polinomios de órdenes distintos. Las figuras que genera se identifican con 
 los números del 16 al 20.
 
