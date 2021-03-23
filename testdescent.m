@@ -168,7 +168,7 @@ grid;
 ## llegar al mínimo.                                                ##
 ######################################################################
 
-#Tomado como referencia batch_grad_descent.m (brindado por el profesor)
+#Tomado como referencia batch_grad_descent.m y nrregress de la clase 7 (brindado por el profesor)
 minX = min(Xo);
 maxX = max(Xo);
 
@@ -177,6 +177,9 @@ nareas=nx.transform(areas);
 
 
 ## Método Batch Gradient Descent ## 
+
+#Primero se evalua la hipótesis en la primer aproximacion 
+# Y se desnormaliza para visualizar los datos que queremos(precio)
 An=hypothesis(nareas',thetas_batch(1,:));
 A=ny.itransform(An);
 
@@ -193,6 +196,8 @@ grid on;
 hold on;
 
 plot(areas,A,'k',"linewidth",2);
+
+#Se grafica cada aproximación hasta llegar a la última que se define con el color verde
 
 for (i=[2:rows(thetas_batch)])
   An=hypothesis(nareas',thetas_batch(i,:));
@@ -321,6 +326,8 @@ plot(areas,A,'g',"linewidth",3);
 ######################################################################
 
 ## Método Batch Gradient Descent ##
+
+#Se evalua cada metodo con distintos learning rates  
 t0 = [-1 -0.2 -0.3];
 l_rate=0.01; #tiene que ser menor o igual a 0.01
 maxiter=300;
@@ -366,7 +373,18 @@ l_rate=0.0008; #tiene que ser menor o igual a 0.01
 iter_batch=[0:1:length(errors_batch)-1]';
 plot(iter_batch,errors_batch,'c','linewidth',2);
 
-legend({'alpha=0.01','alpha=0.005','alpha=0.001','alpha=0.0008'}
+
+l_rate=0.0004; #tiene que ser menor o igual a 0.01
+[thetas_batch,errors_batch]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
+                            "method",method,
+                            "epsilon",epsilon,
+                            "maxiter",maxiter);
+iter_batch=[0:1:length(errors_batch)-1]';
+plot(iter_batch,errors_batch,'m','linewidth',2);
+
+
+
+legend({'alpha=0.01','alpha=0.005','alpha=0.001','alpha=0.0008','alpha=0.0004'}
                               ,"location","northeastoutside");
 title({"Evolución del error J(theta) con distintos ''lr'' por el método:",
               " Batch Gradient Descent "},
@@ -428,7 +446,17 @@ l_rate=0.0008;
 iter_stoch=[0:1:length(errors_stoch)-1]';
 plot(iter_stoch,errors_stoch,'c','linewidth',2);    
 
-legend({'alpha=0.009','alpha=0.005','alpha=0.001','alpha=0.0008'}
+l_rate=0.0004; 
+
+[thetas_stoch,errors_stoch]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
+                            "method","stochastic",
+                            "maxiter",maxiter,
+                            "epsilon",epsilon,
+                            "minibatch",minibatch);
+iter_stoch=[0:1:length(errors_stoch)-1]';
+plot(iter_stoch,errors_stoch,'m','linewidth',2);   
+
+legend({'alpha=0.009','alpha=0.005','alpha=0.001','alpha=0.0008','alpha=0.0004'}
                               ,"location","northeastoutside");
 
 title({"Evolución del error J(theta) con distintos ''lr'' por el método:"," Stochastic Gradient Descent "},
@@ -491,7 +519,17 @@ l_rate=0.0008;
 iter_mom=[0:1:length(errors_mom)-1]';
 plot(iter_mom,errors_mom,'c','linewidth',2);    
 
-legend({'alpha=0.009','alpha=0.005','alpha=0.001','alpha=0.0008'}
+l_rate=0.0004;
+[thetas_mom,errors_mom]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
+                            "method","momentum",
+                            "maxiter",maxiter,
+                            "epsilon",epsilon,
+                            "minibatch",minibatch);
+                         
+iter_mom=[0:1:length(errors_mom)-1]';
+plot(iter_mom,errors_mom,'m','linewidth',2);    
+
+legend({'alpha=0.009','alpha=0.005','alpha=0.001','alpha=0.0008','alpha=0.0004'}
                               ,"location","northeastoutside");
 title({"Evolución del error J(theta) con distintos ''lr'' por el método:",
               " Stochastic Gradient Descent with momentum "},
@@ -526,7 +564,7 @@ hold on;
 iter_rms=[0:1:length(errors_rms)-1]';
 plot(iter_rms,errors_rms,'b','linewidth',2);                            
                             
-l_rate=0.01;   
+l_rate=0.03;   
 
 [thetas_rms,errors_rms]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
                             "method","rmsprop",
@@ -539,7 +577,7 @@ l_rate=0.01;
 iter_rms=[0:1:length(errors_rms)-1]';
 plot(iter_rms,errors_rms,'r','linewidth',2);                            
                             
-l_rate=0.008;              
+l_rate=0.01;              
 [thetas_rms,errors_rms]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
                             "method","rmsprop",
                             "beta", beta,
@@ -551,7 +589,7 @@ l_rate=0.008;
 iter_rms=[0:1:length(errors_rms)-1]';
 plot(iter_rms,errors_rms,'g','linewidth',2);                            
                             
-l_rate=0.004;     
+l_rate=0.008;     
 
 [thetas_rms,errors_rms]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
                             "method","rmsprop",
@@ -562,9 +600,22 @@ l_rate=0.004;
                             "minibatch",minibatch);        
            
 iter_rms=[0:1:length(errors_rms)-1]';
-plot(iter_rms,errors_rms,'c','linewidth',2);                            
+plot(iter_rms,errors_rms,'c','linewidth',2);    
+
+l_rate=0.006;     
+
+[thetas_rms,errors_rms]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
+                            "method","rmsprop",
+                            "beta", beta,
+                            "beta2", beta2,
+                            "maxiter",maxiter,
+                            "epsilon",epsilon,
+                            "minibatch",minibatch);        
+           
+iter_rms=[0:1:length(errors_rms)-1]';
+plot(iter_rms,errors_rms,'m','linewidth',2);                            
                             
-legend({'alpha=0.05','alpha=0.01','alpha=0.008','alpha=0.004'}
+legend({'alpha=0.05','alpha=0.03','alpha=0.01','alpha=0.008','alpha=0.006'}
                               ,"location","northeastoutside");
 title({"Evolución del error J(theta) con distintos ''lr'' por el método:",
               " Stochastic Gradient Descent with RMSprop "},
@@ -630,7 +681,20 @@ l_rate=0.009;
 iter_adam=[0:1:length(errors_adam)-1]';
 plot(iter_adam,errors_adam,'c','linewidth',2);                            
                             
-legend({'alpha=0.05','alpha=0.03','alpha=0.01','alpha=0.009'}
+                            
+l_rate=0.004;    
+
+[thetas_adam,errors_adam]=descentpoly(@loss,@gradloss,t0,X,Y,l_rate,
+                            "method","adam",
+                            "beta", beta,
+                            "maxiter",maxiter,
+                            "epsilon",epsilon,
+                            "minibatch",minibatch);                            
+iter_adam=[0:1:length(errors_adam)-1]';
+plot(iter_adam,errors_adam,'m','linewidth',2);  
+
+  
+legend({'alpha=0.05','alpha=0.03','alpha=0.01','alpha=0.009','alpha=0.004'}
                               ,"location","northeastoutside");
 title({"Evolución del error J(theta) con distintos ''lr'' por el método:",
               " Stochastic Gradient Descent with ADAM "},
